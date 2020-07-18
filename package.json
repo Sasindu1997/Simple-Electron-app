@@ -1,0 +1,22 @@
+{
+  "name": "electron-basic",
+  "version": "1.0.0",
+  "description": "shopping list desktop app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sasindu1997/Simple-Electron-app.git"
+  },
+  "author": "Sasindu Usgalhewa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sasindu1997/Simple-Electron-app/issues"
+  },
+  "homepage": "https://github.com/Sasindu1997/Simple-Electron-app#readme",
+  "dependencies": {
+    "electron": "^9.1.0"
+  }
+}
