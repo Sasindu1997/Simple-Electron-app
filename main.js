@@ -1,8 +1,19 @@
-const electron = require('electrone')
+const electron = require('electron')
 const url = require('url')
 const path = require('path')
-const { BrowserWindow } = require('electron')
 
-cosnt {app, BrowserWindow} = electron;
+const { app, BrowserWindow } = electron;
 
 let mainWindow;
+
+//Listen for the app
+app.on('ready', function(){
+    //create new window
+    mainWindow = new BrowserWindow({});
+    //load html into window
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'mainWindow.html'),
+        protocol: 'file:',
+        slashes:true
+    }))
+});
