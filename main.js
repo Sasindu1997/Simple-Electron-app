@@ -33,6 +33,9 @@ app.on('ready', function(){
 function createAddWindow(){
      //create new window
      addWindow = new BrowserWindow({
+        webPreferences: {
+            nodeIntegration: true
+        },
          width: 300,
          height: 200,
          title: 'Add Shopping List Item'
