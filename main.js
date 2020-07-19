@@ -1,7 +1,7 @@
 const electron = require('electron')
 const url = require('url')
 const path = require('path');
-const { Menu } = require('electron');
+const { Menu, ipcMain } = require('electron');
 
 const { app, BrowserWindow } = electron;
 
@@ -51,6 +51,15 @@ function createAddWindow(){
          addWindow = null;
      });
 }
+
+//Catch item:add
+ipcMain.on('item:add',function (e, item) {
+    mainWindow.webContents.send('item:add',item);
+    addWindow.close();
+    label: 'External Link', click: function () { 
+        require('electron').shell.openExternal('http://electron.atom.io'); 
+      }
+});
 
 //create menu template
 const mainMenuTemplate = [
