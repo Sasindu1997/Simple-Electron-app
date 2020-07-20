@@ -1,9 +1,8 @@
 const electron = require('electron')
 const url = require('url')
 const path = require('path');
-const { Menu, ipcMain } = require('electron');
 
-const { app, BrowserWindow } = electron;
+const { app, BrowserWindow, Menu, ipcMain } = electron;
 
 let mainWindow;
 let addWindow;
@@ -11,7 +10,11 @@ let addWindow;
 //Listen for the app
 app.on('ready', function(){
     //create new window
-    mainWindow = new BrowserWindow({});
+    mainWindow = new BrowserWindow({
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
     //load html into window
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'mainWindow.html'),
@@ -54,11 +57,9 @@ function createAddWindow(){
 
 //Catch item:add
 ipcMain.on('item:add',function (e, item) {
+    console.log(item);
     mainWindow.webContents.send('item:add',item);
     addWindow.close();
-    label: 'External Link', click: function () { 
-        require('electron').shell.openExternal('http://electron.atom.io'); 
-      }
 });
 
 //create menu template
@@ -73,7 +74,10 @@ const mainMenuTemplate = [
                 }
             },
             {
-                label: 'Clear Items'
+                label: 'Clear Items',
+                click(){
+                    mainWindow.webContents.send('item:clear')
+                }
             },
             {
                 label:'Quite',
